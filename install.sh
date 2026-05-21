@@ -2,7 +2,7 @@
 set -euo pipefail
 
 APP_NAME="yt-feed"
-REPO="jaredkoontz/yt-feed-deploy"
+REPO="jaredkoontz/yt_feed_deploy"
 VERSION="${1:-}"
 
 if [[ -z "$VERSION" ]]; then

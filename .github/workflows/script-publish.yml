@@ -1,0 +1,31 @@
+# .github/workflows/release.yml
+name: Release Deployment Assets
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make install.sh executable
+        run: chmod +x install.sh
+
+      - name: Create GitHub Release and upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: |
+            install.sh
+            docker-compose.yml
+            .env.example
