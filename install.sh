@@ -22,8 +22,8 @@ curl -fsSLO "${BASE_URL}/docker-compose.yml"
 
 if [[ ! -f .env ]]; then
   echo "Downloading env template"
-  curl -fsSLO "${BASE_URL}/.env.example"
-  cp .env.example .env
+  curl -fsSLO "${BASE_URL}/default.env.example"
+  cp default.env.example .env
   echo "Edit .env before continuing"
   exit 0
 fi
