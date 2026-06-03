@@ -4,7 +4,7 @@ services:
     container_name: yt_feed_app
     command: >
       gunicorn
-      --conf app/yt_feed/conf/gunicorn_conf.py
+      --conf python:yt_feed.conf.gunicorn_conf
       --bind 0.0.0.0:8000
       yt_feed.web_app:yt_feed_app
     environment:
