@@ -1,7 +1,14 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   app:
-    image: ghcr.io/jaredkoontz/yt_feed:main
+    image: ghcr.io/jaredkoontz/yt_feed:1.0
     container_name: yt_feed_app
+    restart: unless-stopped
     command: >
       gunicorn
       --conf python:yt_feed.conf.gunicorn_conf
@@ -18,10 +25,13 @@ services:
       resources:
         limits:
           memory: 512M
+    logging: *default-logging
   nginx:
     image: ghcr.io/jaredkoontz/yt_feed_deploy:main
     container_name: yt_feed_edge
+    restart: unless-stopped
     ports:
       - "80:80"
     depends_on:
       - app
+    logging: *default-logging
